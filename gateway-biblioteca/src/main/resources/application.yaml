@@ -1,0 +1,23 @@
+spring:
+    application:
+        name: gateway-biblioteca
+server:
+    port: 3333
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+        registerWithEureka: true
+        fetchRegistry: true
+    instance:
+        preferIpAddress: true
+zuul:
+    prefix: /api
+    ignoredServices: '*'
+    routes:
+        livroService:
+            path: /livros/**
+            serviceId: livro-service
+        usuarioService:
+            path: /usuarios/**
+            serviceId: usuario-service
